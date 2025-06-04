@@ -29,6 +29,8 @@ function menuHTML() {
       `;
   });
   menuEl.innerHTML = menuHTML;
+
+  // test
 }
 menuHTML();
 
