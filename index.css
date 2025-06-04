@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-size: 1rem;
+  font-family: "Edu QLD Beginner", cursive;
+}
+.container {
+  max-width: 400px;
+  margin: auto auto;
+}
+header {
+  background-image: url("./image/1628855546-burgersonions.jpg");
+  background-size: cover;
+  opacity: 90%;
+}
+.title {
+  text-align: end;
+  text-shadow: 0 0 2px black;
+  padding: 0 60px 15px 0;
+  color: yellow;
+}
+.title h2 {
+  font-size: 1rem;
+  border-bottom: 1px;
+}
+.title h1 {
+  display: inline-block;
+  margin-bottom: 0;
+  border-bottom: 5px double;
+  border-top: 5px double;
+  padding-bottom: 6px;
+}
+.titleheading {
+  margin-right: -45px;
+}
+.menu {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+  flex-direction: column;
+  text-align: center;
+  border-bottom: 5px double;
+}
+.menuBtn {
+  display: flex;
+  padding: 10px;
+  justify-content: space-around;
+}
+.plus,
+.minus {
+  padding: 5px 10px;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+}
+ul {
+  list-style: none;
+}
+.paymentBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: flex;
+  margin: 0 auto;
+}
+.total {
+  text-align: center;
+}
+
+.payment-section {
+  position: relative;
+}
+#payment-popUp {
+  display: none;
+  position: absolute;
+  bottom: 400px;
+  left: 90px;
+  border: 1px solid;
+  text-align: center;
+  width: 60%;
+  background-color: whitesmoke;
+}
+#card-section {
+  border: 1px solid;
+}
+.close-modal {
+  padding: 5px;
+}
+.card-section {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  justify-content: center;
+}
+.paymentBtn:hover {
+  background-color: aqua;
+}
