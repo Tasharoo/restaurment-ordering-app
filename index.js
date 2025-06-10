@@ -48,6 +48,14 @@ function updateHTML() {
       </div>
       <hr>
     `;
+  const discount = 10;
+  if (totalPrce >= 30) {
+    totalEl.innerHTML += `<h2 class="discount">You have a discount of £${discount} for orders over £30</h2>`;
+    const discountedTotal = (totalPrce - discount).toFixed(2);
+    totalEl.innerHTML += `<h2 class="total">Your total after discount is £${discountedTotal}</h2>`;
+  } else {
+    totalEl.innerHTML += `<h2 class="discount">You need to order more than £30 to get a discount</h2>`;
+  }
 
   const paymentBtn = document.getElementById("payment");
   if (paymentBtn) {
