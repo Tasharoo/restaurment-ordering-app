@@ -7,9 +7,6 @@ const paymentPopUp = document.getElementById("payment-popUp");
 const closeModal = document.getElementById("close-modal");
 const completePayment = document.getElementById("complete-payment");
 
-function reloadPage() {
-  window.location.reload();
-}
 function menuHTML() {
   let menuHTML = "";
   menu.forEach((menu, index) => {
@@ -52,12 +49,10 @@ function updateHTML() {
       <hr>
     `;
 
-  // Attach the event listener to the new Pay button
   const paymentBtn = document.getElementById("payment");
   if (paymentBtn) {
     paymentBtn.addEventListener("click", () => {
       paymentPopUp.style.display = "block";
-      console.log("potato");
     });
   }
 }
@@ -68,21 +63,21 @@ menuEl.addEventListener("click", (event) => {
   if (target.dataset.index !== undefined) {
     const index = parseInt(target.dataset.index);
     if (!isNaN(index) && index >= 0 && index < menu.length) {
+      const item = {
+        name: menu[index].name,
+        price: menu[index].price,
+      };
       if (target.classList.contains("plus")) {
-        const item = {
-          name: menu[index].name,
-          price: menu[index].price,
-        };
         totalItems.push(item);
         updateHTML();
       } else if (target.classList.contains("minus")) {
-        const item = {
-          name: menu[index].name,
-          price: menu[index].price,
-        };
-        totalItems.pop(item);
-
-        updateHTML();
+        const itemindex = totalItems.findIndex(
+          (i) => i.name === item.name && i.price === item.price
+        );
+        if (itemindex !== -1) {
+          totalItems.splice(itemindex, 1);
+          updateHTML();
+        }
       }
     }
   }
@@ -94,23 +89,22 @@ document.getElementById("payment").addEventListener("click", () => {
 
 closeModal.addEventListener("click", () => {
   paymentPopUp.style.display = "none";
-  reloadPage();
+  window.location.reload();
 });
 
 completePayment.addEventListener("click", () => {
   const name = document.getElementById("name").value;
   const cardDetails = document.getElementById("cardDetails").value;
   const cvvNumber = document.getElementById("CvvNumber").value;
-  const isNameVailed = name !== " ";
-  const isCardDetailsVailed = cardDetails !== " ";
-  const isCvvNumberVailed = cvvNumber !== " ";
-  // && /^\d{3,4}$/.test(cardDetails);
-  // && /^\d{16}$/.test(cardDetails);
+  const isNameVailed = name !== " " && /^[a-zA-Z\s]+$/.test(name);
+  const isCardDetailsVailed =
+    cardDetails !== " " && /^\d{16}$/.test(cardDetails);
+  const isCvvNumberVailed = cvvNumber !== " " && /^\d{3,4}$/.test(cvvNumber);
 
   if (!isNameVailed || !isCardDetailsVailed || !isCvvNumberVailed) {
     alert(`
       Please ensure all inputs are filled out correctly:
-      Name cannot be empty
+      Name cannot be empty and must contain only letters
       Card details must be a 16-digit number
       CVV should be 3 or 4-digit number
       `);
@@ -119,7 +113,7 @@ completePayment.addEventListener("click", () => {
     paymentPopUp.style.display = "none";
 
     setTimeout(() => {
-      reloadPage();
+      window.location.reload();
     }, 4000);
   }
 });
